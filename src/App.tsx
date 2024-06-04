@@ -1,77 +1,65 @@
-import { useState } from "react";
-
-import Button from "./components/Button";
-import Icon from "./components/Icon";
-import Pin from "./components/Pin";
-import Typewriter from "./components/Typewriter";
-
-import viteLogo from "/vite.svg";
+import {motion} from 'framer-motion'
+import {Feature} from './components/features/index.tsx'
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const words = [
-    { text: "Vite", className: "text-[#a95eff]" },
-    { text: " + " },
-    { text: "React", className: "text-[#61dafb]" },
-    { text: " + " },
-    { text: "Tailwindcss", className: "text-[#0ea5e9]" },
-    { text: " + " },
-    { text: "Framer Motion", className: "text-[#ff57c8]" },
-  ];
-
   return (
     <div className="text-center">
-      <header className="flex min-h-screen flex-col items-center justify-center gap-2 bg-[#282c34] pb-8 text-white">
-        <Pin text="React 👍">
-          <Icon />
-        </Pin>
+         <Feature index={5} centered className="feat-darkmode" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
 
-        <Typewriter words={words} />
-        <p className="my-10">
-          <Button onTap={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </Button>
-        </p>
-        <p>
-          Edit <code className="text-[#8d96a7]">App.tsx</code> and save to test
-          HMR updates.
-        </p>
-        <p className="mt-3 flex gap-3 text-center text-[#8d96a7]">
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-500"
-            href="https://react.dev/learn"
-            target="_blank"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-500"
-            href="https://vitejs.dev/guide/"
-            target="_blank"
-          >
-            Vite Docs
-          </a>
-          {" | "}
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-500"
-            href="https://tailwindcss.com/docs/installation"
-            target="_blank"
-          >
-            Tailwindcss Docs
-          </a>
-          {" | "}
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-500"
-            href="https://www.framer.com/motion/"
-            target="_blank"
-          >
-            Framer Docs
-          </a>
-        </p>
-        <img src={viteLogo} className="mx-auto my-4" />
-      </header>
+      <motion.div
+            animate={{
+              backgroundPosition: ['0% 0%', '50% 40%', '50% 40%', '100% 100%'],
+              backgroundImage: [`radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)`, 'radial-gradient(farthest-corner, #06080a, #e2e5ea)', 'radial-gradient(farthest-corner, #06080a, #e2e5ea)', 'radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)'],
+            }}
+            transition={{
+              backgroundPosition: {
+                times: [0, .5, .5, 1],
+                type: 'spring',
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
+              },
+              backgroundImage: {
+                times: [0, .2, .8, 1],
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
+              },
+            }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: `radial-gradient(farthest-corner, #06080a, #e2e5ea)`,
+              backgroundSize: '400% 400%',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
+          <motion.h3
+            animate={{
+              color: ['#dae5ff', '#fff', '#fff', '#dae5ff'],
+            }}
+            transition={{
+              color: {
+                times: [.25, .35, .7, .8],
+                type: 'spring',
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
+              },
+            }}
+            style={{
+              position: 'relative',
+              mixBlendMode: 'difference',
+            }}
+          >Dark <br/>mode <br/>included</motion.h3>
+        </Feature>
     </div>
   );
 }
